@@ -28,12 +28,13 @@ describe('org.papernet.commercialpaper-papercontract@0.0.1' , () => {
     const gateway = new fabricNetwork.Gateway();
     let connectionProfile;
     const wallet = new fabricNetwork.InMemoryWallet();
-    const identityName = 'papercontract@0.0.2';
+    const identityName = 'papercontract@0.0.1';
     
     before(async () => {
-        const connectionProfilePath = '/Users/drmiller/.fabric-vscode/local_fabric/connection.json';
-        const certificatePath = '/Users/drmiller/.fabric-vscode/local_fabric/certificate';
-        const privateKeyPath = '/Users/drmiller/.fabric-vscode/local_fabric/privateKey';
+        const homedir = require('os').homedir();
+        const connectionProfilePath = homedir + '/' + '.fabric-vscode/local_fabric/connection.json';
+        const certificatePath = homedir + '/' + '.fabric-vscode/local_fabric/certificate';
+        const privateKeyPath = homedir + '/' + '.fabric-vscode/local_fabric/privateKey';
 
         const connectionProfileContents = await fs.readFile(connectionProfilePath, 'utf8');
         if (connectionProfilePath.endsWith('.json')) {
@@ -84,7 +85,7 @@ describe('org.papernet.commercialpaper-papercontract@0.0.1' , () => {
 
     it('issue', async () => {
         // TODO: Update with parameters of transaction
-        const args = ['MillerCorp5', '00007', '2020-05-31', '2020-11-30', '5000000'];
+        const args = ['MagnetoCorp', '00001', '2020-05-31', '2020-11-30', '5000000'];
 
         const response = await submitTransaction('issue', args); // Returns buffer of transaction return value
         // TODO: Update with return value of transaction
@@ -100,7 +101,7 @@ describe('org.papernet.commercialpaper-papercontract@0.0.1' , () => {
 
     it('buy', async () => {
         // TODO: Update with parameters of transaction
-        const args = ['MillerCorp5', '00007', 'MillerCorp5', 'DigiBank', '4900000', '2020-05-31'];
+        const args = ['MagnetoCorp', '00001', 'MagnetoCorp', 'DigiBank', '4900000', '2020-05-31'];
 
         const response = await submitTransaction('buy', args); // Returns buffer of transaction return value
         // TODO: Update with return value of transaction
@@ -116,7 +117,7 @@ describe('org.papernet.commercialpaper-papercontract@0.0.1' , () => {
 
     it('redeem', async () => {
         // TODO: Update with parameters of transaction
-        const args = ['MillerCorp5', '00007', 'DigiBank', '2020-11-30'];
+        const args = ['MagnetoCorp', '00001', 'DigiBank', '2020-11-30'];
 
         const response = await submitTransaction('redeem', args); // Returns buffer of transaction return value
         // TODO: Update with return value of transaction
